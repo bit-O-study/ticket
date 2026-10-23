@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>첫 공 · KBO 티켓 도우미</title><link rel="stylesheet" href="src/style.css"></head>
+<body><main>
+<header><a class="brand" href="dashboard.html"><span class="mark">⚾</span> 첫 공 <small>TICKET ASSISTANT</small></a><span class="local">내 브라우저에만 저장</span></header>
+<section class="hero"><div><p class="eyebrow">READY FOR THE FIRST PITCH</p><h1>보고 싶은 경기,<br><em>예매 준비는 미리.</em></h1><p>홈 구단을 고르고 오픈 시간을 예약하세요.<br>시간이 되면 예매 페이지를 열고 지정 경기의 예매 버튼을 확인합니다.</p></div><div class="clock-card"><span>한국 표준시 · 내 PC 시계 기준</span><strong id="clock">--:--:--</strong><p>예약 실행 중에는 브라우저와 PC를 켜 두세요.</p></div></section>
+<section aria-labelledby="teams-title"><div class="section-head"><h2 id="teams-title">01 <span>홈 구단 선택</span></h2><a href="https://www.koreabaseball.com/kbo/league/map.aspx" target="_blank" rel="noreferrer">공식 예매 안내 ↗</a></div><div id="teams" class="teams" role="group" aria-label="홈 구단"></div></section>
+<div class="workspace"><section class="panel" aria-labelledby="setup-title"><div class="section-head"><h2 id="setup-title">02 <span>예매 준비</span></h2><span id="provider"></span></div>
+<form id="plan-form"><div id="edit-banner" class="edit-banner" hidden><span>예약 수정 중</span><button id="cancel-edit" type="button">수정 취소</button></div><div class="form-grid">
+<label>상대 구단<select name="opponentId" required></select></label><label>경기 시작 · 한국 시간<input name="gameAt" type="datetime-local" required></label>
+<label class="wide">예매 오픈 · 한국 시간<input name="openAt" type="datetime-local" step="1" required><small>일반·선예매에 따라 다릅니다. 공식 공지의 시간을 입력하세요.</small></label>
+<label class="wide">경기 / 구단 예매 페이지<input name="url" type="url" required><small>공식 예매처에서 원하는 경기나 구단 페이지 주소를 복사하면 더 정확합니다.</small></label>
+<label>희망 인원 · 메모<input name="quantity" type="number" min="1" max="6" value="2" required></label><label>희망 구역 · 메모<input name="section" maxlength="100" placeholder="예: 1루 내야, 연석"></label>
+<label>화면 확인 시간<select name="watchMinutes"><option value="1">1분</option><option value="3">3분</option><option value="5" selected>5분</option><option value="10">10분</option></select></label>
+<label>오픈 전 준비 알림<select name="reminderMinutes"><option value="0">알림 끄기</option><option value="1">1분 전</option><option value="3">3분 전</option><option value="5" selected>5분 전</option><option value="10">10분 전</option><option value="30">30분 전</option></select></label>
+</div><label class="check"><input name="autoClick" type="checkbox"><span>지정 경기의 <b>예매 버튼을 한 번 클릭</b><small>날짜·시간·양 팀이 모두 일치하는 버튼이 하나일 때만 실행합니다. 좌석 선택과 결제는 직접 진행합니다.</small></span></label>
+<p class="note">로그인·대기열·보안문자가 감지되면 직접 진행 알림을 표시합니다. 새로고침을 반복하지 않고 현재 화면만 확인합니다.</p>
+<div class="actions"><button type="button" id="prepare" class="secondary">예매처 열고 미리 로그인</button><button type="submit" id="save-plan" class="primary">오픈 예약 추가 ＋</button></div>
+<p id="form-status" role="status" aria-live="polite"></p></form></section>
+<section class="panel" aria-labelledby="plans-title"><div class="section-head"><h2 id="plans-title">03 <span>내 예약</span></h2><span id="count">0건</span></div><div class="toolbar"><button type="button" id="export">백업 저장</button><button type="button" id="import">백업 불러오기</button><button type="button" id="stop-all">전체 중지</button><input id="backup-file" type="file" accept="application/json,.json" hidden></div><p id="backup-status" role="status" aria-live="polite"></p><div id="plans"></div><p class="footnote">시간 경과·절전으로 1분 이상 늦어진 예약은 자동 실행하지 않습니다. 브라우저를 다시 열면 상태를 확인하세요. 복원·재시작한 예약은 자동 클릭이 꺼져 있습니다.</p></section></div>
+<footer><span>KBO 10개 구단 · 공식 예매처 연결</span><span>예매 버튼 감지는 잔여 좌석·예매 성공을 뜻하지 않습니다.</span></footer>
+</main><script type="module" src="src/dashboard.js"></script></body></html>

@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "첫 공 · KBO 티켓팅 매크로",
+  "version": "0.4.0",
+  "description": "KBO 예매 오픈 예약·알림, 예매 화면 동작 지정·순차 실행(사용자 책임, 결제 단계 자동 정지)",
+  "permissions": [
+    "storage",
+    "alarms",
+    "scripting",
+    "notifications",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "https://*.ticketlink.co.kr/*",
+    "https://nol.yanolja.com/*",
+    "https://ticket.interpark.com/*",
+    "https://tickets.interpark.com/*",
+    "https://poticket.interpark.com/*",
+    "https://ticket.ssg.com/*",
+    "https://ticket.giantsclub.com/*",
+    "https://ticket.ncdinos.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "첫 공 열기"
+  },
+  "options_page": "macro.html",
+  "icons": {
+    "128": "icon.png"
+  },
+  "minimum_chrome_version": "120"
+}

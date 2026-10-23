@@ -1,0 +1,17 @@
+{
+  "name": "kbo-ticket-assistant",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/core.test.mjs tests/macro-core.test.mjs tests/macro-dom.test.mjs tests/picker.test.mjs tests/cancellation.test.mjs tests/background.test.mjs",
+    "check": "node --check src/background.js && node --check src/content.js && node --check src/dashboard.js && node --check src/core.js && node --check src/macro-core.js && node --check src/macro-engine.js && node --check src/macro-dom.js && node --check src/macro-picker.js && node --check src/macro-ui.js",
+    "test:browser": "node tests/browser.mjs && node tests/macro.browser.mjs && node tests/macro-dom.browser.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright": "1.60.0"
+  }
+}

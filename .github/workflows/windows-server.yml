@@ -1,0 +1,48 @@
+name: Windows server deployment
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: windows-server-main
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main' && github.repository == 'bit-O-study/ticket'
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Test, build and package
+        env:
+          BUILD_PUBLIC_ENV: ${{ vars.BUILD_PUBLIC_ENV }}
+        run: node scripts/deploy/build-release.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-release
+          path: release.tar
+          retention-days: 1
+          if-no-files-found: error
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.repository == 'bit-O-study/ticket' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: [self-hosted, Windows, X64, bito-ticket]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-release
+          path: ${{ runner.temp }}/bito-release-${{ github.run_id }}
+      - name: Activate release and verify health
+        shell: powershell
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+          RELEASE_ARCHIVE: ${{ runner.temp }}/bito-release-${{ github.run_id }}/release.tar
+        run: '& C:/services/Bit-O/tools/deploy.ps1 -Project ticket -Sha $env:RELEASE_SHA -Archive $env:RELEASE_ARCHIVE'

@@ -1,0 +1,7 @@
+{
+  "name": "ticket",
+  "port": 4106,
+  "app": ".",
+  "kind": "extension",
+  "user": "bito_ticket"
+}

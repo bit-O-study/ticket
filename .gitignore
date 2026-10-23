@@ -1,0 +1,21 @@
+node_modules/
+test-results/
+*.log
+.env*
+playwright-report/
+blob-report/
+coverage/
+# packaged extension and signing key
+*.zip
+*.crx
+*.pem
+# dashboard backup exports
+first-pitch-*.json
+
+.env*
+!.env.example
+*.db*
+*.tsbuildinfo
+.next/
+release/
+release.tar
