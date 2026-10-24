@@ -15,3 +15,5 @@ SSH remains restricted to LocalSubnet. Application ports allow LocalSubnet; exte
 Verification pending: first Actions build, deployment health, reboot recovery, external access. 
 
 2026-10-24 verification: npm test passed (66 tests); npm run check passed. Shared supervisor integration test passed promotion, startup-failure rollback, invalid release rejection and previous application availability. First GitHub Actions run pending.
+
+2026-10-25: First Actions build succeeded. Deployment stopped before execution because the service account uses Windows default Restricted execution policy. The workflow now invokes PowerShell with a process-scoped execution policy; machine/user policies remain unchanged. Workflow YAML parsed and main/build gates verified.

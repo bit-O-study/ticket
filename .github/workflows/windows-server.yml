@@ -41,7 +41,7 @@ jobs:
           name: windows-release
           path: ${{ runner.temp }}/bito-release-${{ github.run_id }}
       - name: Activate release and verify health
-        shell: powershell
+        shell: powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File {0}
         env:
           RELEASE_SHA: ${{ github.sha }}
           RELEASE_ARCHIVE: ${{ runner.temp }}/bito-release-${{ github.run_id }}/release.tar
